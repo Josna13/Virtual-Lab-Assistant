@@ -1,0 +1,15 @@
+{
+  "name": "elctron-apps",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.8.1",
+    "electron": "^34.2.0"
+  }
+}

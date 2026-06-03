@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head> 
+<body>
+    <div class="container">
+        <div class="content">
+            <h1><span>Virtual</span> <br> Lab <br> Assistant</h1>
+            <button class="btn" id="registerButton">Register</button>
+            <button class="btn" id="loginButton">Log In</button>
+            <div class="google-login">
+                <button class="google-btn" id="googleLoginButton">
+                    <img src="google.webp" alt="Google Logo">
+                    Log in with Google
+                </button>
+            </div>
+            <br>
+            <button class="btn" id="chatbotButton">Chatbot</button>
+            <button class="btn" id="llamaTextButton">Llama Text Generator</button>
+        </div>
+        <span class="robot-container">
+            <img src="rb_30034.png" alt="Robot Assistant">
+        </span>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require("electron");
+
+        document.getElementById("registerButton").addEventListener("click", async () => {
+            const name = prompt("Enter your name:");
+            const email = prompt("Enter your email:");
+            const password = prompt("Enter your password:");
+            if (!name || !email || !password) return alert("All fields are required!");
+            
+            const response = await ipcRenderer.invoke("register", { name, email, password });
+            alert(response.message || response.error);
+        });
+
+        document.getElementById("loginButton").addEventListener("click", async () => {
+            const email = prompt("Enter your email:");
+            const password = prompt("Enter your password:");
+            if (!email || !password) return alert("All fields are required!");
+            
+            const response = await ipcRenderer.invoke("login", { email, password });
+            alert(response.message || response.error);
+        });
+
+        document.getElementById("chatbotButton").addEventListener("click", () => {
+            window.location.href = "chatbot.html"; // Open Chatbot Page
+        });
+
+        document.getElementById("llamaTextButton").addEventListener("click", () => {
+            window.location.href = "llama_text.html"; // Open Llama Text Generator
+        });
+    </script>
+</body>
+</html>
